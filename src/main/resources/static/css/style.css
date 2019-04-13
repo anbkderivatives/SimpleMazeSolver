@@ -1,0 +1,94 @@
+body {
+    background-image: url('../assets/img/light-gray-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+/*
+    Header styles
+*/
+.header {
+    background-image: url('../assets/img/giphy.gif');
+    background-repeat: no-repeat;
+    height: 10em;
+
+    /*background-position: center center;*/
+    background-attachment: local;
+    background-position: center center;
+    background-size: cover;
+}
+
+.header div {
+    text-align: center;
+
+    /*color: #ffffff;*/
+    font-size: 25px;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.header div h2 {
+    position: relative;
+    bottom: 0.6em;
+    color: #cecece;
+    box-shadow: 5px -3px 8px 0px #9b9b9b;
+}
+
+.header div h5 {
+    position: relative;
+    bottom: 2.2em;
+    color: #a9a9a9;
+    text-shadow: 7px -1px 25px #737373;
+}
+
+table {
+    text-align: center;
+    border-bottom-style: dotted;
+    border-left-style: dotted;
+    border-right-style: dotted;
+    border-left-color: rgba(0, 0, 0, 0.32);
+    border-bottom-color: rgba(0, 0, 0, 0.32);
+    border-right-color: rgba(0, 0, 0, 0.32);
+}
+
+.header_title {
+    background-image: url('../assets/img/hTitle.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: local;
+    font-size: 22px;
+    text-align: center;
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    color: #5e5e5e;
+    padding-top: 0.2em;
+    font-family: Acme;
+}
+
+
+.titleStyle1 {
+    font-size: 18px;
+    background-color: #d9d9d9;
+    font-family: Average;
+}
+
+.titleStyle2 {
+    text-align: center;
+    font-style: italic;
+}
+
+.titleStyle3 {
+    /*for button collapsible styles*/
+    color: #1b2350;
+    margin-left: 38%;
+}
+
+.textStyle {
+    font-family: Amiri;
+    font-size: 16px;
+    background-color: #ffffff;
+    padding-left: 2px;
+    padding-right: 2px;
+}

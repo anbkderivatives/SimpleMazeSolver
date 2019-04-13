@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Simple Maze Solver Page">
+        <meta name="author" content="Andi Beka">
+        <title>Simple Maze Solver Page</title>
+        <link href="/assets/img/fvi.jpg" rel="shortcut icon" type="image/png" />
+        <link href="/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Average"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amiri"/>
+    </head>
+    <body>
+        <header>
+            <div>
+                <br/>
+                <h2 class="titleStyle2" style="color: #1b2350;">
+                    Welcome to the Simple Maze Solver
+                </h2>
+            </div>
+        </header>
+        
+        <main>
+
+            <h3>The rules of the Maze</h3>
+            <div>   
+                    <span style="font-style: italic;font-weight: bold;">
+                    The idea is to run a program on the server that solves simple mazes. The mazes are given in 
+                    txt files from the client side.
+                    </span>
+                    <br/>
+                    <br/>Maze input/output formats
+                    <br/>========================= 
+                    <br/>1 - denotes walls
+                    <br/>0 - traversable passage way
+                    <br/>
+                    <br/>Input:
+                    <br/>Width Height    (first line)       dimension of the maze   
+                    <br/>Start_X Start_Y (second line)	    (x-width,y-height) location of the start point. (0,0) is upper left and (width-1,height-1) is lower right
+                    <br/>End_X End_Y     (third line)	    (x-width,y-height) location of the end point.
+                    <br/>
+                    <br/>Output:
+                    <br/>the solution maze with a path from start to end
+                    <br/>walls are marked by '#', passages are marked by space ' ', path are marked by 'X', start/end are marked by 'S'/'E'
+            </div>
+            <br/>
+            <center>
+                <div class="textStyle" style="background-color: rgba(243, 241, 241, 0.904);">
+                    The approach used finding the solution path of the maze was accomplished by utilizing 
+                    the combination of a Greedy Algorithm and a selective traversal. The Greedy Algorithm 
+                    was implemented by attributing heuristic values to the Squares/Node of the maze.
+                    The heuristic technique uses Manhattan Distance from the current node until the end of 
+                    the searched path, wherein a list with examining nodes decide where next heading 
+                    should go accordingly to the heuristic.   
+                    Thus, is succeeded a more efficient and faster way avoiding all BFS (brute force) 
+                    traversal.
+                    <br/>This example was built to explore the potential of Java Spring in the back-end  
+                    dealing/communicating through large data given by user-client in the front-end.
+                    
+                </div>
+            </center>
+            <br/>
+            <div>
+                <div class="textStyle">
+                        The "corpus" of the .txt mazes files where are contained on the server,
+                        can be opened/downloaded below
+                </div>
+                <br/><a href="/FileInputs/custom.txt" target="_blank" rel="noopener noreferrer">custom.txt</a>
+                <br/><a href="/FileInputs/custom2.txt" target="_blank" rel="noopener noreferrer">custom2.txt</a> (no solution)
+                <br/><a href="/FileInputs/input.txt" target="_blank" rel="noopener noreferrer">input.txt</a> 
+                <br/><a href="/FileInputs/small_input.txt" target="_blank" rel="noopener noreferrer">small_input.txt</a>
+                <br/><a href="/FileInputs/small_wrap_input.txt" target="_blank" rel="noopener noreferrer">small_wrap_input.txt</a>
+                <br/><a href="/FileInputs/medium_input.txt" target="_blank" rel="noopener noreferrer">medium_input.txt</a>
+                <br/><a href="/FileInputs/large_input.txt" target="_blank" rel="noopener noreferrer">large_input.txt</a>
+                <br/><a href="/FileInputs/sparse_medium.txt" target="_blank" rel="noopener noreferrer">sparse_medium.txt</a>
+                <br/><a href="/FileInputs/sparse_large.txt" target="_blank" rel="noopener noreferrer">sparse_large.txt</a>
+            </div>
+            <br/>
+            <div class="textStyle">
+                Select Maze file to solve. There are two options of the files selection, first option is to select "maze" from the server
+                and the second option is to create from your own device. Is more convenient when a file is downloaded from the server and 
+                edited purposing custom inputs.
+            </div>
+            <br/>
+            <table style="width:720px;">
+                <tr>
+                    <td>
+                        Server Corpus:
+                    </td>
+                    <td>
+                            <select id="fileMazeSelect">
+                                <option>custom.txt</option>
+                                <option>custom2.txt</option>
+                                <option>input.txt</option>
+                                <option>small_input.txt</option>
+                                <option>small_wrap_input.txt</option>
+                                <option>medium_input.txt</option>
+                                <option>large_input.txt</option>
+                                <option>sparse_medium.txt</option>
+                                <option>sparse_large.txt</option>
+                            </select>
+                    </td>
+                    <td>
+                            <button onclick="sendSelectedTextMazeFileLocatedOnServer('fileMazeSelect')">Select and send data</button>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="border-bottom: 1.5px dotted;"></td>
+                    <td style="border-bottom: 1.5px solid;"></td>
+                    <td style="border-bottom: 1.5px dotted;"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        Create your own:
+                    </td>
+                    <td>
+                            <input type="file" id="fileinput" />
+                    </td>
+                    <td>
+                            <button id="clientSendFileBtn" onclick="sendSelectedTextMazeFileLocatedOnClient('fileMazeSelect')">Select and send data</button>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                    <tr>
+                            <td>
+                                (For security reasons no browser allows to have full file path access to client device.  
+                                Only reading is allowed when a specific input is given from the client consent)
+                            </td>
+                    </tr>
+            </table>
+                
+            
+                        
+            <br/>
+            <center>
+                <div id="info"></div>
+                <div id="isSolveMaze"></div>
+                <div id="msgMaze"></div>
+                
+                <!-- Is used monospace text style because usually the charachter are not having the same width -->
+                <div id="printMaze" style="font-family: monospace;"></div>
+            </center>
+            
+            <!--creating space-->
+            <div style="height: 400px;"></div>
+        </main>  
+
+        
+		<script src="/SimpleMazeSolverStatic/js/clientFileReader.js"></script>
+        <script src="/SimpleMazeSolverStatic/js/jquery-3.3.1.min.js"></script>
+		<script src="/SimpleMazeSolverStatic/js/ajaxCommunication.js"></script>
+    </body>
+</html>
