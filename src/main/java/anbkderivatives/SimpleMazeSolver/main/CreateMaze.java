@@ -1,19 +1,25 @@
 package anbkderivatives.SimpleMazeSolver.main;
 
-import java.io.FileReader;
+//import java.io.FileReader;
+import java.net.InetAddress;
+import java.net.URL;
 
 import java.io.BufferedReader;
 //import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import java.io.InputStreamReader;
+
+//import org.springframework.core.io.ClassPathResource;
+//import org.springframework.core.io.Resource;
 
 //Create Maze form reading file
-
 public class CreateMaze {
 	//---------------------------------------	 Variables	---------------------------------------
 	
+	
+	//get current ip address of the hosting domain
+	String ip;
 
 	// The 2d representative Maze with the following symbols
 	// 0 - traversable passage way
@@ -31,7 +37,13 @@ public class CreateMaze {
 	
 	//---------------------------------------	 Methods	---------------------------------------
 	public CreateMaze() {
-		
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress();
+			//System.out.println (InetAddress.getLocalHost()); //output: LAPTOP-8KMC37DN/192.168.1.215
+		}catch(IOException ex) {
+			System.out.println("Error reading ip ");
+			ex.printStackTrace();
+		}
 	}
 
 	public void initializeMaze(String givenMazeFile) {
@@ -60,19 +72,20 @@ public class CreateMaze {
 		int l = 0; // current letter crossing from each line of the file
 
 		try {
+						
+			//get port number 
+			String portNr="5000";
+			String pathDomainandPort = ip+":"+portNr;
+			String pathFile = "http://"+pathDomainandPort + "/FileInputs/" + givenMazeFile;
+			//System.out.println(pathFile); //output example: http://192.168.1.215:5000/FileInputs/medium_input.txt
+						
+			// Create url object from the url string
+			URL url = new URL(pathFile);
 			
-			Resource resource = new ClassPathResource("/static/FileInputs/"+givenMazeFile);
-			String path = resource.getURL().getPath();
-			//System.out.println("PATH: " + resource.getURL().getPath());
-			
-			// FileReader reads text by character in the default encoding
-			FileReader fileReader;
-			
-			//fileReader = new FileReader("FileInputs/" + givenMazeFile);
-			fileReader = new FileReader(path);
-			
-
-			// Wrap FileReader in BufferedReader.
+			// Open url connection to get the content html/txt or whatever, in our case is gotten txt file
+			InputStreamReader fileReader = new InputStreamReader(url.openStream(), "UTF-8");
+					
+			// Wrap fileReader/txt file in BufferedReader.
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			// initialization of the maze
