@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 
 //Create Maze form reading file
 public class CreateMaze {
-	//---------------------------------------	 Variables	---------------------------------------
+	//---------------------------------------	 Variables	----------------------------------------
 	
 	
 	//get current ip address of the hosting domain
